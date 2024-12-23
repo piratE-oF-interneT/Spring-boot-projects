@@ -20,5 +20,11 @@ public interface AuthorRepository extends JpaRepository<Author,Long>{
 	@Transactional
 	@Query("update Author a set a.email = :email where id = :id")
 	int updateEmail(String email , Long id);
+	
+	
+	@Query("select a from Author a where id = :id ")
+	
+	Author getAuthor(Long id);
+	
 
 }

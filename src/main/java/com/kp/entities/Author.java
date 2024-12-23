@@ -37,6 +37,12 @@ public class Author {
 			)
 	private Long id;
 	
+	@Override
+	public String toString() {
+		return "Author [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", createdAt=" + createdAt + ", courses=" + courses + "]";
+	}
+
 	@Column(
 			nullable = false,
 			insertable=true,
