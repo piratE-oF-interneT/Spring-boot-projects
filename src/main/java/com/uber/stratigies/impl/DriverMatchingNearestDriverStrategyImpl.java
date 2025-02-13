@@ -1,12 +1,14 @@
 package com.uber.stratigies.impl;
 
-import java.sql.Driver;
 import java.util.List;
 
+import org.locationtech.jts.io.WKTWriter;
+import org.modelmapper.internal.bytebuddy.asm.Advice.Return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uber.dtos.RideRequestDto;
+import com.uber.entities.Driver;
 import com.uber.entities.RideRequest;
 import com.uber.repositories.DriverRepository;
 import com.uber.stratigies.DriverMatchingStrategy;
@@ -20,10 +22,14 @@ public class DriverMatchingNearestDriverStrategyImpl implements DriverMatchingSt
 	@Override
 	public List<Driver> findMatchingDriver(RideRequest rideRequest) {
 		// TODO Auto-generated method stub
+		WKTWriter wktWriter = new WKTWriter();
+		String pickUpLocation = wktWriter.write(rideRequest.getPickUpLocation());
+				
+//		String wktWithSRID = String.format("SRID=4326;%s", pickUpLocation); 
 		
-		driverRepository.findAllByLocation(rideRequest.getPickUpLocation());
+		return driverRepository.findNearestTenDriver(pickUpLocation);
 		
-		return null;
+	
 	}
 
 }

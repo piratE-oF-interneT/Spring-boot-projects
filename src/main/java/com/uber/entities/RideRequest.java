@@ -2,21 +2,13 @@ package com.uber.entities;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.locationtech.jts.geom.Point;
 
+import com.uber.configs.PointConverter;
 import com.uber.enums.PaymentMethod;
 import com.uber.enums.RideRequestStatus;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,13 +16,38 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Getter
-@Setter
+@Table(
+		indexes = {
+				@Index(name = "idx_riderequest_rider" , columnList = "rider_id"),
+
+
+		}
+)
+
 public class RideRequest {
 	
+	
+	
+	public RideRequest(Rider rider, RideRequestStatus status, Point dropLocation, Point pickUpLocation,
+			PaymentMethod payment, Double fair, LocalDateTime requestTime) {
+		super();
+		this.rider = rider;
+		this.status = status;
+		this.dropLocation = dropLocation;
+		this.pickUpLocation = pickUpLocation;
+		this.payment = payment;
+		this.fair = fair;
+		this.requestTime = requestTime;
+	}
+	
+	
+
+	public RideRequest() {
+		super();
+	}
+
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long rideRequestId;
@@ -42,9 +59,11 @@ public class RideRequest {
 	@Enumerated(EnumType.STRING)
 	private RideRequestStatus status;
 	
+	@Convert(converter = PointConverter.class)
 	@Column(columnDefinition = "Geometry(Point,4326)")
 	private Point dropLocation;
 	
+	@Convert(converter = PointConverter.class)
 	@Column(columnDefinition = "Geometry(Point,4326)")
 	private Point pickUpLocation;
 	
@@ -94,6 +113,14 @@ public class RideRequest {
 
 	public void setPayment(PaymentMethod payment) {
 		this.payment = payment;
+	}
+
+	public Long getRideRequestId() {
+		return rideRequestId;
+	}
+
+	public void setRideRequestId(Long rideRequestId) {
+		this.rideRequestId = rideRequestId;
 	}
 
 	public Double getFair() {

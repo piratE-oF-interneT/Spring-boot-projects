@@ -17,7 +17,8 @@ public class CalculateDefaultFairStrategyImpl implements CalculateFairStrategy{
 	@Override
 	public Double calculateFair(RideRequest rideRequest) {
 		// TODO Auto-generated method stub
-		return distanceService.calculateDistance(rideRequest.getPickUpLocation(), rideRequest.getDropLocation()) *PER_KM_MULTIPLIER;
+		return distanceService
+				.calculateDistance(rideRequest.getPickUpLocation(), rideRequest.getDropLocation()) *PER_KM_MULTIPLIER;
 	}
 
 }

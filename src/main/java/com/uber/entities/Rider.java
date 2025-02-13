@@ -15,9 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "app_rider")
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Rider {
 	
 	@Id
@@ -64,7 +62,15 @@ public class Rider {
 	public void setRidesRequested(Set<RideRequest> ridesRequested) {
 		this.ridesRequested = ridesRequested;
 	}
-	
-	
 
+	public Rider(Long id, User user, Double rating, Set<RideRequest> ridesRequested) {
+		this.id = id;
+		this.user = user;
+		this.rating = rating;
+		this.ridesRequested = ridesRequested;
+	}
+
+	public Rider(){
+
+	}
 }

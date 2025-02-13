@@ -2,30 +2,9 @@ package com.uber.dtos;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import com.uber.entities.Rider;
-import com.uber.enums.PaymentMethod;
-import com.uber.enums.RideRequestStatus;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 
 public class RideRequestDto {
 	
@@ -33,7 +12,7 @@ public class RideRequestDto {
 	private Long rideRequestId;
 	
 
-	private RiderDto rider;
+	private Rider rider;
 	
 
 	private String status;
@@ -63,12 +42,12 @@ public class RideRequestDto {
 	}
 
 
-	public RiderDto getRider() {
+	public Rider getRider() {
 		return rider;
 	}
 
 
-	public void setRider(RiderDto rider) {
+	public void setRider(Rider rider) {
 		this.rider = rider;
 	}
 
@@ -131,6 +110,16 @@ public class RideRequestDto {
 	public void setRequestTime(LocalDateTime requestTime) {
 		this.requestTime = requestTime;
 	}
+
+	
+
+	@Override
+	public String toString() {
+		return "RideRequestDto [rideRequestId=" + rideRequestId + ", rider=" + rider + ", status=" + status
+				+ ", dropLocation=" + dropLocation + ", pickUpLocation=" + pickUpLocation + ", payment=" + payment
+				+ ", fair=" + fair + ", requestTime=" + requestTime + "]";
+	}
+	
 	
 	
 

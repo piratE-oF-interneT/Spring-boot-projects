@@ -1,18 +1,20 @@
 package com.uber.configs;
 
 
+import org.locationtech.jts.geom.Point;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.internal.bytebuddy.asm.Advice.Return;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 import com.uber.dtos.PointDto;
 import com.uber.utils.GeometryUtil;
 
 import java.awt.image.renderable.ContextualRenderedImageFactory;
 
-import org.locationtech.jts.geom.Point;
+
 
 
 @Configuration

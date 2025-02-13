@@ -21,9 +21,50 @@ public class Wallet {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	private Double balance;
+	private Double balance = 0.0;
 	
 	@OneToMany(mappedBy = "wallet")
 	private List<WalletTransaction> transactions;
 
+	public Long getWalletId() {
+		return walletId;
+	}
+
+	public void setWalletId(Long walletId) {
+		this.walletId = walletId;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Double balance) {
+		this.balance = balance;
+	}
+
+	public List<WalletTransaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(List<WalletTransaction> transactions) {
+		this.transactions = transactions;
+	}
+
+	public Wallet(Long walletId, User user, Double balance, List<WalletTransaction> transactions) {
+		this.walletId = walletId;
+		this.user = user;
+		this.balance = balance;
+		this.transactions = transactions;
+	}
+
+	public Wallet() {
+	}
 }
